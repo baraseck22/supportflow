@@ -15,6 +15,46 @@ SupportFlow est une application professionnelle de gestion des tickets et incide
 - dashboard support, résolution, réouverture et fermeture ;
 - observabilité Prometheus/Grafana et alerting.
 
+## Aperçu de l'application
+
+### Authentification
+
+![Écran de connexion SupportFlow](docs/screenshots/login.png)
+
+La page de connexion initialise la session JWT et permet d’accéder à l’espace correspondant au rôle de l’utilisateur.
+
+### Dashboard support
+
+![Dashboard opérationnel SupportFlow](docs/screenshots/dashboard.png)
+
+Le tableau de bord N1/N2 synthétise les tickets ouverts, leur répartition et les échéances SLA nécessitant une attention.
+
+### Gestion des tickets
+
+![Liste des tickets et filtres](docs/screenshots/ticket-list.png)
+
+La liste propose une recherche ainsi que des filtres par statut, priorité et agent assigné.
+
+![Formulaire de création d’un ticket](docs/screenshots/ticket-create.png)
+
+Le formulaire guide la saisie de l’incident, de sa priorité et de sa catégorie.
+
+### Fiche ticket et actions support
+
+![Informations détaillées d’un ticket](docs/screenshots/ticket-detail-1.png)
+
+La fiche centralise le statut, la priorité, la description, les acteurs et les actions disponibles selon le cycle de vie.
+
+![SLA et commentaires du ticket](docs/screenshots/ticket-detail-2.png)
+
+Le suivi présente les échéances SLA et les échanges publics ou internes associés au ticket.
+
+### Historique
+
+![Historique chronologique du ticket](docs/screenshots/ticket-history.png)
+
+La chronologie conserve les événements importants : création, affectation, première réponse, transitions et commentaires.
+
 ## Architecture
 
 ```mermaid
