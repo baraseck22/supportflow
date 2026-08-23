@@ -1,0 +1,33 @@
+<section class="detail-page"><button class="back" type="button" (click)="back()">← Retour aux tickets</button>
+@if(loading()){<div class="state"><span class="spinner"></span><strong>Chargement du ticket…</strong></div>}@else if(error()){<div class="state error" role="alert"><strong>{{error()}}</strong><button type="button" (click)="back()">Retour aux tickets</button></div>}@else if(ticket();as item){
+<article class="ticket-card"><header><div><p class="number">{{item.ticketNumber}}</p><h1>{{item.title}}</h1></div><div class="badges"><span class="badge status" [attr.data-status]="item.status">{{statusLabel(item.status)}}</span><span class="badge priority" [attr.data-priority]="item.priority">{{priorityLabel(item.priority)}}</span></div></header>
+<div class="content-grid"><div class="main-column"><section class="panel"><h2>Description</h2><p class="description">{{item.description}}</p></section><section class="panel"><h2>Dates</h2><dl><div><dt>Créé le</dt><dd>{{item.createdAt|date:'dd/MM/yyyy à HH:mm'}}</dd></div><div><dt>Mis à jour le</dt><dd>{{item.updatedAt|date:'dd/MM/yyyy à HH:mm'}}</dd></div>@if(item.resolvedAt){<div><dt>Résolu le</dt><dd>{{item.resolvedAt|date:'dd/MM/yyyy à HH:mm'}}</dd></div>}@if(item.closedAt){<div><dt>Fermé le</dt><dd>{{item.closedAt|date:'dd/MM/yyyy à HH:mm'}}</dd></div>}</dl></section></div>
+<aside><section class="panel"><h2>Informations générales</h2><dl><div><dt>Catégorie</dt><dd>{{item.category.name}}</dd></div><div><dt>Créateur</dt><dd>{{item.createdBy.firstName}} {{item.createdBy.lastName}}<small>{{item.createdBy.email}}</small></dd></div><div><dt>Assigné à</dt><dd>@if(item.assignedTo){ {{item.assignedTo.firstName}} {{item.assignedTo.lastName}}<small>{{item.assignedTo.role}}</small> }@else{ Non assigné }</dd></div></dl></section></aside></div>
+
+@if(showSupportActions){<app-ticket-actions [ticket]="item" (actionSucceeded)="handleActionSuccess($event)" />}
+<app-ticket-sla [ticketId]="item.id" />
+
+<section class="comments-section">
+  <header class="comments-header"><div><p class="eyebrow">Échanges</p><h2>Commentaires</h2></div><span class="comment-count">{{comments().length}}</span></header>
+  @if(commentsLoading()){<div class="comments-state">Chargement des commentaires…</div>}
+  @else if(commentsError()){<div class="comments-state comments-error" role="alert">{{commentsError()}}</div>}
+  @else if(comments().length===0){<div class="comments-state">Aucun commentaire pour le moment.</div>}
+  @else{<div class="comment-list">@for(comment of comments();track comment.id){
+    <article class="comment" [class.internal-comment]="comment.internal">
+      <header><div class="avatar">{{comment.author.firstName.charAt(0)}}{{comment.author.lastName.charAt(0)}}</div><div><strong>{{comment.author.firstName}} {{comment.author.lastName}}</strong><p>{{comment.author.role}} · {{comment.createdAt|date:'dd/MM/yyyy à HH:mm'}}</p></div>@if(comment.internal){<span class="internal-badge">Note interne</span>}</header>
+      <p class="comment-content">{{comment.content}}</p>
+    </article>
+  }</div>}
+
+  @if(item.status==='CLOSED'){<div class="comments-state closed-comments">Ce ticket est fermé. Aucun nouveau commentaire ne peut être ajouté.</div>}@else{<form class="comment-form" [formGroup]="commentForm" (ngSubmit)="publish()">
+    <label for="comment-content">Ajouter un commentaire</label>
+    <textarea id="comment-content" rows="5" maxlength="5000" formControlName="content" placeholder="Écrivez votre message…"></textarea>
+    <div class="form-meta"><span class="validation">@if(content.touched&&content.invalid){Le commentaire doit contenir entre 1 et 5000 caractères.}</span><span>{{content.value.length}} / 5000</span></div>
+    @if(canCreateInternalNote){<fieldset class="visibility-choice"><legend>Visibilité</legend><label><input type="radio" name="visibility" [checked]="!internal()" (change)="setInternal(false)"> Commentaire public</label><label><input type="radio" name="visibility" [checked]="internal()" (change)="setInternal(true)"> Note interne</label></fieldset>}
+    @if(publishError()){<p class="publish-error" role="alert">{{publishError()}}</p>}
+    <div class="form-actions"><button class="publish" type="submit" [disabled]="content.invalid||publishing()">{{publishing()?'Publication…':'Publier'}}</button></div>
+  </form>}
+</section>
+<app-ticket-history [ticketId]="item.id" />
+</article>}
+</section>

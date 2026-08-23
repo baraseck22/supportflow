@@ -1,0 +1,10 @@
+<section class="history-section">
+  <header><p>Suivi</p><h2>Historique</h2></header>
+  @if(loading()){<div class="history-state">Chargement de l'historique…</div>}
+  @else if(error()){<div class="history-state error" role="alert"><span>Impossible de charger l'historique.</span><button type="button" (click)="load()">Réessayer</button></div>}
+  @else if(entries().length===0){<div class="history-state">Aucun événement enregistré.</div>}
+  @else{<ol class="timeline">@for(entry of entries();track entry.id){<li>
+    <span class="dot" aria-hidden="true"></span>
+    <div class="event"><time [attr.datetime]="entry.createdAt">{{entry.createdAt|date:'dd/MM/yyyy à HH:mm'}}</time><strong>{{describe(entry)}}</strong><p>{{entry.changedBy.firstName}} {{entry.changedBy.lastName}} · {{entry.changedBy.role}}</p></div>
+  </li>}</ol>}
+</section>

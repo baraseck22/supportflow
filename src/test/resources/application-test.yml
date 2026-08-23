@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:supportflow;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+springdoc:
+  api-docs:
+    enabled: false
+
+supportflow:
+  jwt:
+    secret: test-only-jwt-secret-that-is-at-least-32-bytes-long
+    expiration-seconds: 3600

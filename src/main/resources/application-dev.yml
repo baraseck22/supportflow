@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/supportflow}
+    username: ${DB_USERNAME:supportflow}
+    password: ${DB_PASSWORD}
+  jpa:
+    show-sql: true
+  flyway:
+    locations:
+      - classpath:db/migration
+      - classpath:db/devmigration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+logging:
+  level:
+    com.baraseck.supportflow: DEBUG
+
+supportflow:
+  observability:
+    prometheus-public: true
+  cors:
+    allowed-origins: http://localhost:4200

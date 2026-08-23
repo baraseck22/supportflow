@@ -1,0 +1,38 @@
+groups:
+  - name: supportflow-application
+    rules:
+      - alert: SupportFlowDown
+        expr: up{job="supportflow"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: supportflow
+        annotations:
+          summary: SupportFlow is unavailable
+          description: Prometheus has been unable to scrape SupportFlow for at least one minute.
+
+      - alert: HighHttp5xxRate
+        expr: sum(rate(http_server_requests_seconds_count{job="supportflow",status=~"5.."}[5m])) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: supportflow
+        annotations:
+          summary: High HTTP 5xx error rate
+          description: SupportFlow has produced more than 0.1 HTTP 5xx responses per second for five minutes.
+
+      - alert: HikariPoolNearSaturation
+        expr: |
+          (
+            sum(hikaricp_connections_active{job="supportflow"})
+            /
+            clamp_min(sum(hikaricp_connections_max{job="supportflow"}), 1)
+          ) >= 0.8
+          and sum(hikaricp_connections_max{job="supportflow"}) > 0
+        for: 2m
+        labels:
+          severity: warning
+          service: supportflow
+        annotations:
+          summary: HikariCP connection pool near saturation
+          description: At least 80 percent of the SupportFlow connection pool has been active for two minutes.

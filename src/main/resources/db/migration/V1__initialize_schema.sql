@@ -1,0 +1,2 @@
+-- Schéma initial volontairement vide.
+-- Les tables métier seront ajoutées avec les futures entités.

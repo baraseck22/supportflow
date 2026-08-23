@@ -1,0 +1,13 @@
+INSERT INTO app_user (id, first_name, last_name, email, password_hash, role, active, created_at, updated_at) VALUES
+    ('10000000-0000-0000-0000-000000000001', 'Alice', 'Martin', 'alice.user@supportflow.local', 'DEVELOPMENT_SEED_NO_REAL_PASSWORD', 'USER', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('10000000-0000-0000-0000-000000000002', 'Nicolas', 'Support', 'nicolas.n1@supportflow.local', 'DEVELOPMENT_SEED_NO_REAL_PASSWORD', 'SUPPORT_N1', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('10000000-0000-0000-0000-000000000003', 'Sophie', 'Expert', 'sophie.n2@supportflow.local', 'DEVELOPMENT_SEED_NO_REAL_PASSWORD', 'SUPPORT_N2', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('10000000-0000-0000-0000-000000000004', 'Admin', 'SupportFlow', 'admin@supportflow.local', 'DEVELOPMENT_SEED_NO_REAL_PASSWORD', 'ADMIN', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO category (id, name, description, active, created_at, updated_at) VALUES
+    ('20000000-0000-0000-0000-000000000001', 'AUTHENTICATION', 'Problèmes de connexion et d’authentification', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('20000000-0000-0000-0000-000000000002', 'ACCESS', 'Demandes et incidents liés aux droits d’accès', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('20000000-0000-0000-0000-000000000003', 'APPLICATION_ERROR', 'Erreurs fonctionnelles ou techniques de l’application', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('20000000-0000-0000-0000-000000000004', 'DATA', 'Problèmes liés aux données', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('20000000-0000-0000-0000-000000000005', 'PERFORMANCE', 'Lenteurs et problèmes de performance', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('20000000-0000-0000-0000-000000000006', 'OTHER', 'Autres demandes de support', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

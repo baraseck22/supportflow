@@ -1,0 +1,19 @@
+<section class="dashboard"><div class="heading"><p>VUE OPÉRATIONNELLE</p><h1>Tableau de bord</h1><span>Suivez les tickets qui nécessitent l'attention de l'équipe support.</span></div>
+@if(loading()){<div class="state"><span class="spinner"></span><strong>Chargement du tableau de bord…</strong></div>}
+@else if(error()){<div class="state error" role="alert"><strong>Impossible de charger le tableau de bord.</strong><button type="button" (click)="load()">Réessayer</button></div>}
+@else if(summary();as data){
+  @if(noData(data)){<div class="empty">Aucune donnée opérationnelle pour le moment.</div>}
+  <div class="kpis">
+    <article><span>Tickets ouverts</span><strong>{{data.totalOpen}}</strong></article>
+    <button type="button" (click)="filter({status:'NEW'})"><span>Nouveaux</span><strong>{{data.newTickets}}</strong></button>
+    <button type="button" (click)="filter({status:'IN_PROGRESS'})"><span>En cours</span><strong>{{data.inProgress}}</strong></button>
+    <button type="button" (click)="filter({status:'WAITING'})"><span>En attente</span><strong>{{data.pending}}</strong></button>
+    <button type="button" (click)="filter({status:'ESCALATED'})"><span>Escaladés</span><strong>{{data.escalated}}</strong></button>
+    <button type="button" (click)="filter({priority:'CRITICAL'})"><span>Critiques ouverts</span><strong>{{data.criticalOpen}}</strong></button>
+    <button type="button" (click)="filter({unassigned:true})"><span>Non assignés</span><strong>{{data.unassigned}}</strong></button>
+  </div>
+  <section class="sla"><h2>SLA</h2><div><article class="breach"><span>Réponse dépassée</span><strong>{{data.responseSlaBreached}}</strong></article><article><span>Réponse à risque</span><strong>{{data.responseSlaAtRisk}}</strong></article><article class="breach"><span>Résolution dépassée</span><strong>{{data.resolutionSlaBreached}}</strong></article><article><span>Résolution à risque</span><strong>{{data.resolutionSlaAtRisk}}</strong></article></div></section>
+  <div class="lists"><section><h2>Tickets à traiter en priorité</h2>@if(data.priorityTickets.length===0){<p class="list-empty">Aucun ticket prioritaire.</p>}@else{@for(ticket of data.priorityTickets;track ticket.id){<button class="ticket" type="button" (click)="open(ticket)"><span><strong>{{ticket.ticketNumber}}</strong>{{ticket.title}}</span><span class="meta"><i [attr.data-priority]="ticket.priority">{{priorityLabel(ticket.priority)}}</i><i>{{statusLabel(ticket.status)}}</i></span></button>}}</section>
+  <section><h2>Tickets récents</h2>@if(data.recentTickets.length===0){<p class="list-empty">Aucun ticket récent.</p>}@else{@for(ticket of data.recentTickets;track ticket.id){<button class="ticket" type="button" (click)="open(ticket)"><span><strong>{{ticket.ticketNumber}}</strong>{{ticket.title}}</span><span class="meta"><i>{{ticket.createdAt|date:'dd/MM HH:mm'}}</i><i>{{ticket.assignedTo?ticket.assignedTo.firstName:'Non assigné'}}</i></span></button>}}</section></div>
+}
+</section>

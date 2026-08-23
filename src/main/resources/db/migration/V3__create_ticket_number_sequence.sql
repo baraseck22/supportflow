@@ -1,0 +1,6 @@
+CREATE SEQUENCE ticket_number_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 20;

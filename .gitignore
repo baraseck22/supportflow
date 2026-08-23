@@ -1,0 +1,61 @@
+# Java, Maven et Spring Boot
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.pid
+hs_err_pid*
+.tools/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Environnements et configuration locale
+.env
+.env.*
+!.env.example
+application-local.yml
+application-local.yaml
+docker-compose.override.yml
+
+# Angular, Node et outils frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
+frontend/.cache/
+node_modules/
+dist/
+coverage/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE et éditeurs
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+*.launch
+*.sublime-workspace
+
+# Logs, caches, fichiers temporaires et dumps locaux
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+*.dump
+*.sql.dump
+
+# Système d'exploitation
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/

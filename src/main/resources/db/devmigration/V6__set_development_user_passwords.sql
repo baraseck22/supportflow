@@ -1,0 +1,9 @@
+-- Development-only BCrypt hash for the documented local password.
+UPDATE app_user
+SET password_hash = '$2a$10$euQATR/sUT8CvtAEYbirpOPG.5MMNh2RIj7YqyG4FvLr21EJjci9i'
+WHERE id IN (
+    '10000000-0000-0000-0000-000000000001',
+    '10000000-0000-0000-0000-000000000002',
+    '10000000-0000-0000-0000-000000000003',
+    '10000000-0000-0000-0000-000000000004'
+);

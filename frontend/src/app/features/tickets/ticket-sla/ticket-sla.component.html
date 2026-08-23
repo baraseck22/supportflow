@@ -1,0 +1,17 @@
+<section class="sla-section">
+  <header><p>Engagements de service</p><h2>SLA</h2></header>
+  @if(loading()){<div class="sla-state">Chargement du SLA…</div>}
+  @else if(error()){<div class="sla-state error" role="alert"><span>{{error()}}</span><button type="button" (click)="load()">Réessayer</button></div>}
+  @else if(sla();as data){<div class="sla-grid">
+    <article><header><h3>Réponse</h3><span class="sla-badge" [attr.data-status]="data.responseStatus"><b aria-hidden="true">{{statusSymbol(data.responseStatus)}}</b> {{statusLabel(data.responseStatus)}}</span></header><dl>
+      <div><dt>Échéance</dt><dd>{{data.responseDueAt|date:'dd/MM/yyyy à HH:mm'}}</dd></div>
+      <div><dt>Première réponse</dt><dd>{{data.firstResponseAt?(data.firstResponseAt|date:'dd/MM/yyyy à HH:mm'):'Non enregistrée'}}</dd></div>
+      <div><dt>Temps restant</dt><dd>{{remaining(data.responseStatus,data.responseRemainingSeconds)}}</dd></div>
+    </dl></article>
+    <article><header><h3>Résolution</h3><span class="sla-badge" [attr.data-status]="data.resolutionStatus"><b aria-hidden="true">{{statusSymbol(data.resolutionStatus)}}</b> {{statusLabel(data.resolutionStatus)}}</span></header><dl>
+      <div><dt>Échéance</dt><dd>{{data.resolutionDueAt|date:'dd/MM/yyyy à HH:mm'}}</dd></div>
+      <div><dt>Résolution</dt><dd>{{data.resolvedAt?(data.resolvedAt|date:'dd/MM/yyyy à HH:mm'):'Non résolu'}}</dd></div>
+      <div><dt>Temps restant</dt><dd>{{remaining(data.resolutionStatus,data.resolutionRemainingSeconds)}}</dd></div>
+    </dl></article>
+  </div>}
+</section>
