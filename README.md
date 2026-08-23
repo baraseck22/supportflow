@@ -1,5 +1,10 @@
 # SupportFlow
 
+[![CI](https://github.com/baraseck22/supportflow/actions/workflows/ci.yml/badge.svg)](https://github.com/baraseck22/supportflow/actions/workflows/ci.yml)
+![Java 21](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
+![Angular 21](https://img.shields.io/badge/Angular-21-DD0031?logo=angular&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 SupportFlow est une application professionnelle de gestion des tickets et incidents pour une équipe de support applicatif N1/N2. Elle centralise le cycle de vie d’un incident, la collaboration, le suivi des SLA et l’observabilité de la plateforme.
 
 ## Fonctionnalités
@@ -226,7 +231,7 @@ npm run build
 
 ## Captures d’écran
 
-Les captures du dashboard, de la liste des tickets et de la fiche détaillée pourront être ajoutées dans [`docs/screenshots`](docs/screenshots) avant publication.
+Les captures présentées dans la section [Aperçu de l'application](#aperçu-de-lapplication) sont versionnées dans [`docs/screenshots`](docs/screenshots).
 
 ## Améliorations futures
 
